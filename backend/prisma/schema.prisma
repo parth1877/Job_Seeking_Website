@@ -13,7 +13,25 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model User{
-  id Int @id @default(autoincrement())
-  
+// schema.prisma
+
+model User {
+  id          Int      @id @default(autoincrement())
+  name        String   @db.VarChar(30)
+  email       String   @unique @db.VarChar(150)
+  phoneNumber String   @db.VarChar(10)
+  password    String
+  role        Role     @default(JOBSEEKER)
+  created_at DateTime @default(now())
 }
+
+enum Role {
+    JOBSEEKER
+    EMPLOYEE
+}
+
+
+
+
+
+

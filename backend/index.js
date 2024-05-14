@@ -3,10 +3,13 @@ import {config as dotenvConfig} from "dotenv"
 import {connect_cloudinary} from "./config/cloudinary.js";
 import cookieparser from "cookie-parser"
 import fileUpload from "express-fileupload";
+import userRoutes from "./routes/userRoutes.js"
 
 dotenvConfig();
 
 const PORT = process.env.PORT || 5000;
+
+
 
 
 const app = express();
@@ -14,11 +17,15 @@ const app = express();
 app.use(cookieparser())
 app.use(express.json())
 app.use(express.urlencoded({extended:true}))
+
+connect_cloudinary()
 app.use(fileUpload({
     useTempFiles:true,
     tempFileDir:"/temp/"
 }))
-connect_cloudinary()
+
+
+app.use("/api/v1/user",userRoutes)
 
 app.listen(PORT,()=>{
     console.log(`App is running on port ${PORT}`)
