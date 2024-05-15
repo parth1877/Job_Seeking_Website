@@ -71,7 +71,8 @@ const signUp = async(req,res) =>{
 
 
 
-        return res.status(200).cookie("token",token,{httponly:true , expiresIn:2*24*60*1000}
+        return res.status(200).cookie("token",token,{httponly:true , expires:new Date(Date.now() 
+            + 2*24*60*60*1000)}
         ).json({
             success:true,
             data:newUser,
@@ -125,7 +126,8 @@ const Login = async (req,res) =>{
 
         const options = {
             httponly:true,
-            expiresIn:2*24*60*1000
+            expires:new Date(Date.now() 
+            + 2*24*60*60*1000)
         }
 
         return res.status(200).cookie("token",token,options

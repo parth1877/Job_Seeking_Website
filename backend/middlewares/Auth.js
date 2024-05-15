@@ -1,5 +1,6 @@
 import jwt from "jsonwebtoken";
 import { config as dotenvConfig } from "dotenv";
+import prisma from "../config/prismaConnect.js";
 
 dotenvConfig();
 
@@ -15,9 +16,16 @@ const isAuthorised = async (req, res, next) => {
         }
 
         try {
-            const verification = jwt.verify(token, process.env.JWT_SECRET);
+            const decoded = jwt.verify(token, process.env.JWT_SECRET);
+            
+            req.user = await prisma.user.findUnique({
+                where:{
+                    id:decoded.id
+                }
+            })
             next(); 
         } catch (error) {
+            console.log(error)
             return res.status(401).json({
                 success: false,
                 message: "Token verification failed"

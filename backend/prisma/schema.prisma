@@ -22,6 +22,7 @@ model User {
   phoneNumber String   @db.VarChar(10)
   password    String
   role        Role     @default(JOBSEEKER)
+  jobCreation Job[]
   created_at DateTime @default(now())
 }
 
@@ -29,6 +30,26 @@ enum Role {
     JOBSEEKER
     EMPLOYEE
 }
+
+model Job{
+  id String  @id @default(cuid())
+  title String @db.VarChar(50)
+  description String @db.VarChar(255)
+  category String 
+  country String
+  city String
+  location String 
+  fixedSalary Int?
+  salaryFrom Int? 
+  salaryTo Int?
+  expired Boolean @default(false)
+  jobPostedOn DateTime @default(now())
+  postedBy User @relation(fields: [userID],references: [id])
+  userID Int
+
+}
+
+
 
 
 
