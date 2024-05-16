@@ -1,0 +1,86 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// schema.prisma
+
+model User {
+  id          Int      @id @default(autoincrement())
+  name        String   @db.VarChar(30)
+  email       String   @unique @db.VarChar(150)
+  phoneNumber String   @db.Char(10)
+  password    String
+  role        Role     @default(JOBSEEKER)
+  jobCreation Job[]
+  created_at DateTime @default(now())
+}
+
+enum Role {
+    JOBSEEKER
+    EMPLOYEE
+}
+
+model Job{
+  id String  @id @default(cuid())
+  title String @db.VarChar(50)
+  description String @db.VarChar(255)
+  category String 
+  country String
+  city String
+  location String 
+  fixedSalary Int?
+  salaryFrom Int? 
+  salaryTo Int?
+  expired Boolean @default(false)
+  jobPostedOn DateTime @default(now())
+  postedBy User @relation(fields: [userID],references: [id])
+  userID Int
+
+}
+
+
+model Application {
+  id           String   @id @default(cuid())
+  name         String   @db.VarChar(30)
+  email        String
+  coverLetter  String   @db.VarChar(255)
+  phone        String   @db.Char(10)
+  address      String   @db.VarChar(50)
+  resumePublicID  String 
+  resumeUrl     String
+  applicantrole applicantRole
+  employeerole employeerole 
+  applicantID Int
+  employeeID   Int
+}
+
+enum employeerole {
+  EMPLOYEE
+}
+
+enum applicantRole {
+    JOBSEEKER
+}
+
+
+
+
+
+
+
+
+
+
+
+
