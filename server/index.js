@@ -6,7 +6,7 @@ import fileUpload from "express-fileupload";
 import userRoutes from "./routes/userRoutes.js"
 import jobRoutes from "./routes/jobRouter.js"
 import applicationRoutes from "./routes/applictionRouter.js"
-
+import cors from "cors"
 
 dotenvConfig();
 
@@ -20,6 +20,16 @@ const app = express();
 app.use(cookieparser())
 app.use(express.json())
 app.use(express.urlencoded({extended:true}))
+
+
+app.use(
+    cors({
+      origin: [process.env.FRONTEND_URL],
+      method: ["GET", "POST", "DELETE", "PUT"],
+      credentials: true,
+    })
+);
+
 
 connect_cloudinary()
 app.use(fileUpload({

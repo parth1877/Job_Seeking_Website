@@ -1,4 +1,0 @@
--- AlterTable
-ALTER TABLE "Job" ALTER COLUMN "fixedSalary" DROP NOT NULL,
-ALTER COLUMN "salaryFrom" DROP NOT NULL,
-ALTER COLUMN "salaryTo" DROP NOT NULL;
