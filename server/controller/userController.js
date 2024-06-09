@@ -72,7 +72,7 @@ const signUp = async(req,res) =>{
 
 
         return res.status(200).cookie("token",token,{httponly:true , expires:new Date(Date.now() 
-            + 2*24*60*60*1000)}
+            + 2*24*60*60*1000),sameSite:"none"}
         ).json({
             success:true,
             data:newUser,
@@ -123,7 +123,7 @@ const Login = async (req,res) =>{
         }
 
         const token =  jwt.sign({id:user.id},process.env.JWT_SECRET,{
-            expiresIn:"2d"
+            expiresIn:"2d",sameSite:"none"
         })
 
         user.password = ""
