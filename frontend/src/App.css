@@ -73,7 +73,7 @@ p {
 }
 
 .authPage {
-  display: flex;
+  display: flex;  
   min-width: 1500px;
   max-width: 1500px;
   margin: 0 auto;
@@ -114,11 +114,26 @@ p {
   flex-direction: column;
   gap: 10px;
 }
+
+
 .authPage .container form .inputTag div {
   display: flex;
   align-items: center;
-  border-radius: 7px;
+  border-top-right-radius: 7px;
+  border-bottom-right-radius: 7px;
+
 }
+
+.authPage .container form .inputTag div .Icon {
+  width: 10%;
+  font-size: 1.5rem;
+  background: #2d5649;
+  height: 100%;
+  padding: 8px;
+  
+  color: #fff;
+}
+
 .authPage .container form .inputTag div input,
 .authPage .container form .inputTag div select {
   background: #87878778;
@@ -131,14 +146,14 @@ p {
 .authPage .container form .inputTag div select:focus {
   outline: none;
 }
-.authPage .container form .inputTag div svg {
+/* .authPage .container form .inputTag div svg {
   width: 10%;
   font-size: 1.5rem;
   background: #2d5649;
   height: 100%;
   padding: 8px;
   color: #fff;
-}
+} */
 .authPage .container form button {
   padding: 12px;
   text-align: center;
@@ -739,6 +754,8 @@ p {
   height: 200px;
   font-size: 20px;
   padding: 12px 4px;
+  border: 1px solid #ccc;
+ 
 }
 .application .container form input:focus,
 .application .container form textarea:focus {
