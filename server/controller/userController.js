@@ -71,8 +71,11 @@ const signUp = async(req,res) =>{
 
 
 
-        return res.status(200).cookie("token",token,{httponly:true , expires:new Date(Date.now() 
-            + 2*24*60*60*1000),sameSite:"none"}
+        return res.status(200).cookie("token",token,{
+            httponly:true , 
+            expires:new Date(Date.now() + 2*24*60*60*1000),
+            secure:true,
+            sameSite:"None"}
         ).json({
             success:true,
             data:newUser,
@@ -130,6 +133,8 @@ const Login = async (req,res) =>{
 
         const options = {
             httponly:true,
+            secure:true,
+            sameSite:"None",
             expires:new Date(Date.now() 
             + 2*24*60*60*1000)
         }
@@ -155,7 +160,7 @@ const Logout = (req, res) => {
     try {
 
         
-        return res.cookie("token","",{expiresIn:new Date(Date.now())}).json({
+        return res.cookie("token","",{expiresIn:new Date(Date.now()),secure:true,sameSite:"None"}).json({
             success:true,
             msg:"Logout successfully"
         })
