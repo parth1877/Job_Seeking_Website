@@ -249,7 +249,7 @@ const createApplication = async (req,res)=>{
 
         return res.status(200).json({
             success:true,
-            message:"Application submitted successfull",
+            message:"Application submitted successfully",
             application
         })
 

@@ -10,7 +10,7 @@ router.post("/postJob",isAuthorised,jobController.createJob)
 router.get("/myjobs",isAuthorised,jobController.getMyJobs)
 router.put("/updateJob/:id",isAuthorised,jobController.updateJob)
 router.delete("/deleteJob/:id",isAuthorised,jobController.deleteJob)
-
+router.get("/:id",isAuthorised,jobController.getSingleJob)
 
 
 

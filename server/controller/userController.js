@@ -48,7 +48,7 @@ const signUp = async(req,res) =>{
         if(user){
             return res.status(500).json({
                 success:false,
-                message:"User already registered"
+                message:"Email already registered"
             })
         }
 
@@ -102,6 +102,8 @@ const Login = async (req,res) =>{
             }
         })
 
+        console.log({email,password})
+
         if(!user){
             return res.status(500).json({
                 success:false,
@@ -109,9 +111,11 @@ const Login = async (req,res) =>{
             })
         }
 
-        const compare = bcryptjs.compare(password,user.password);
+        const compare = await bcryptjs.compare(password,user.password);
 
-        if(compare.success == false){
+        
+
+        if(compare == false){
             return res.status(500).json({
                 success:false,
                 message:"Enter correct password"

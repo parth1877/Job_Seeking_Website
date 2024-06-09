@@ -239,7 +239,35 @@ const deleteJob = async(req,res)=>{
     }
 }
 
+const getSingleJob = async(req,res)=>{
+    try {
+        const {id} = req.params;
+        const job = await prisma.job.findUnique({
+            where:{
+                id:id
+            }
+        })
 
-const jobController = {getAllJobs,createJob,getMyJobs,updateJob,deleteJob}
+        if(!job){
+            return res.status(404).json({
+                success:false,
+                message:"Job not found"
+            })
+        }
+        return res.status(200).json({
+            success:true,
+            data:job
+        })
+    } catch (error) {
+        console.log(error)
+        return res.status(500).json({
+            success:false,
+            message:"Something went wrong"
+        })
+    }
+}
+
+
+const jobController = {getAllJobs,createJob,getMyJobs,updateJob,deleteJob,getSingleJob}
 
 export default jobController
