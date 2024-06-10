@@ -34,7 +34,7 @@ app.use(
 connect_cloudinary()
 app.use(fileUpload({
     useTempFiles:true,
-    tempFileDir:"/temp/"
+    tempFileDir:"/tmp/"
 }))
 
 
